@@ -6,3 +6,5 @@
 [daynamic]动态规划  
 [sudoku]数独生成  
 [point_game]24点游戏  
+
+[python_basic]python的一些语法  
