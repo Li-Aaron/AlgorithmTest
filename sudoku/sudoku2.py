@@ -32,6 +32,7 @@ MAX_POS = MAX_NUM * MAX_NUM
 
 class Sudoku2(Sudoku):
     def __init__(self):
+        super(Sudoku, self).__init__()
         # 这里应该还可以优化
         self.matPos = np.array([[self.getMatrixPos(x,y) for y in range(MAX_NUM)] for x in range(MAX_NUM)]) # submatrix pos in mat
         self.matList = np.array([[None for y in range(MAX_NUM)] for x in range(MAX_NUM)]) # value in mat
@@ -81,8 +82,7 @@ class Sudoku2(Sudoku):
             remove_loc.add(random.randint(0, MAX_POS - 1))
 
         for loc in remove_loc:
-            x = self.xyList[loc][0]
-            y = self.xyList[loc][1]
+            x, y = loc // 9, loc % 9
             self.matList[x, y] = None
 
     def Display(self):
@@ -96,7 +96,7 @@ class Sudoku2(Sudoku):
         print display
 
 if __name__ == '__main__':
-    s = Sudoku()
+    s = Sudoku2()
     s.Gen(random.randint(40,60))
     s.Display()
 

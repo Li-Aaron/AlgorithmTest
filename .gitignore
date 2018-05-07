@@ -1,3 +1,5 @@
+*.pyc
+
 # PyCharm Prj Files
 misc.xml
 modules.xml
