@@ -6,5 +6,6 @@
 [daynamic]动态规划  
 [sudoku]数独生成  
 [point_game]24点游戏  
+[sort_old_even_cbased]排序，奇数在前偶数在后（C/Python混编）  
 
 [python_basic]python的一些语法  
