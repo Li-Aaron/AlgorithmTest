@@ -6,14 +6,23 @@ sort_odd_even 的 clib 与 python function 对比
 2018-9-8
 '''
 __author__ = 'AC'
+
+##############################################
+#-----------------  IMPORT  -----------------#
+############################################## 
 from ctypes import CDLL, c_int
 import os, time, copy
 import random
+import functools
 from functools import cmp_to_key
 
-path1 = os.getcwd()
-mylib = CDLL('./Lib/sort.dll')
+##############################################
+#----------------  CONSTANT  ----------------#
+##############################################
+# path1 = os.getcwd()
 # mylib = CDLL(os.path.join(path1,'Lib\\CPyTcl.dll'))
+mylib = CDLL('./Lib/sort.dll')
+
 
 sort_func = [
   mylib.sort_odd_even,
@@ -23,6 +32,40 @@ sort_func = [
 NumNumbers = 100000
 RandomNumbers = [random.randint(0,NumNumbers) for x in range(0,NumNumbers,1)]
 
+
+##############################################
+#---------------  DECORATORS  ---------------#
+##############################################
+def duration(func):
+  # a decorator for time duration test
+  @functools.wraps(func)
+  def wrapper(*args, **kw):
+    startTime = time.time()
+    ret = func(*args, **kw)
+    stopTime = time.time()
+    print('[Function %s] Time Duration:%2.6f'%(func.__name__,(stopTime - startTime)))
+    return ret
+  return wrapper
+
+def res_chk(std_res):
+  def decorator(func):
+    # a decorator for time duration test
+    @functools.wraps(func)
+    def wrapper(*args, **kw):
+      startTime = time.time()
+      ret = func(*args, **kw)
+      stopTime = time.time()
+      res = (ret == std_res)
+      print('[Function %s] Time Duration:%2.6f, check:%s'%(func.__name__,(stopTime - startTime),res))
+      return ret
+    return wrapper
+  return decorator
+
+
+
+##############################################
+#---------------  FUNNCTIONS  ---------------#
+##############################################
 def list2array(a_list):
   # generate an array for c code
   # @param a_list: list
@@ -45,9 +88,11 @@ def array2list(a_array):
     a_list.append(a_array[i])
   return a_list
 
-
+@duration
 def sort_odd_even_py(a_list):
   # a python based sort function
+  # @param a_list: list
+  # @param return: sorted list
   def _compare(a, b):
     if a < b:
       return -1
@@ -65,26 +110,30 @@ def sort_odd_even_py(a_list):
   return sorted(a_list, key=cmp_to_key(compare))
 
 
+
+##############################################
+#------------------  MAIN  ------------------#
+##############################################
 if __name__ == '__main__':
   # run python code
   py_alist = copy.copy(RandomNumbers)
-  startTime = time.time()
   standard_result = sort_odd_even_py(py_alist)
-  stopTime = time.time()
-  print('[Function Py] Time Duration:%2.6f'%((stopTime - startTime)))
+
+  @res_chk(standard_result)
+  def sort_odd_even_c(py_alist, fun_sel):
+    # warpper for c sort function
+    # @param a_list: list
+    # @param fun_sel: int
+    # @param return: sorted list
+    c_array = list2array(py_alist)
+    n = len(py_alist)
+    sort_func[fun_sel](c_array, n)
+    print('[%s]'%(fun_sel),end='')
+    return array2list(c_array)
 
   # run c code
   for i in range(len(sort_func)):
-    c_array = list2array(RandomNumbers)
-    n = len(RandomNumbers)
-    # Test time passed
-    startTime = time.time()
-    sort_func[i](c_array, n)
-    stopTime = time.time()
-    py_list = array2list(c_array)
-    # check result:
-    res = (py_list == standard_result)
-    print('[Function C_%s] Time Duration:%2.6f, check:%s'%(i,(stopTime - startTime),res))
+    sort_odd_even_c(py_alist, i)
 
 
 
