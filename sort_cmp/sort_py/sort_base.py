@@ -24,7 +24,7 @@ def duration(func):
     startTime = time.time()
     ret = func(*args, **kw)
     stopTime = time.time()
-    print('[Function %s] Time Duration:%6.3fs'%(func.__name__,(stopTime - startTime)))
+    print('[Function %s] Time Duration:%6.6fs'%(func.__name__,(stopTime - startTime)))
     return ret
   return wrapper
 
@@ -37,7 +37,7 @@ def res_chk(std_res):
       ret = func(*args, **kw)
       stopTime = time.time()
       res = (ret == std_res)
-      print('[Function %s] Time Duration:%2.6f, check:%s'%(func.__name__,(stopTime - startTime),res))
+      print('[Function %s] Time Duration:%6.6f, check:%s'%(func.__name__,(stopTime - startTime),res))
       return ret
     return wrapper
   return decorator
