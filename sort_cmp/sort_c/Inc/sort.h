@@ -13,5 +13,6 @@ extern BOOLEAN compare(FLT64 a, FLT64 b);
 EXPORT void SortBubble(FLT64 a[], INT32 n);
 EXPORT void SortInsert(FLT64 a[], INT32 n);
 EXPORT void SortQuick(FLT64 a[], INT32 n);
+EXPORT void SortQuick2(FLT64 a[], INT32 n);
 
 #endif

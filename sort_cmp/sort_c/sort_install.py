@@ -24,6 +24,7 @@ SortFuncC = [
   sort_lib.SortBubble,
   sort_lib.SortInsert,
   sort_lib.SortQuick,
+  sort_lib.SortQuick2,
 ]
 
 
@@ -61,7 +62,7 @@ def SortCaller(func, py_list):
 
 if __name__ == '__main__':
   import random
-  NumNumbers = 10
+  NumNumbers = 30
   RandomNumbers = [random.uniform(0,10) for x in range(0,NumNumbers,1)]
   print(RandomNumbers)
   for func in SortFuncC:

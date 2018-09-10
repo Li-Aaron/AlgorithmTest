@@ -41,8 +41,30 @@ void _SortQuick(FLT64 a[], INT32 left, INT32 right, BOOLEAN cmp(FLT64, FLT64))
 	_SortQuick(a, pivot_idx + 1, right, cmp);
 }
 
-// fast sort
+// quick sort
 void SortQuick(FLT64 a[], INT32 n)
 {
 	_SortQuick(a, 0, n - 1, compare);
+}
+
+
+// quick sort with insert sort
+void _SortQuick2(FLT64 a[], INT32 left, INT32 right, BOOLEAN cmp(FLT64, FLT64))
+{
+	// terminate condition
+	if (right - left < 10){
+		SortInsert(&a[left], right - left);
+		return;
+	}
+
+	INT32 pivot_idx = _SortPartion(a, left, right, cmp);
+	// recursion
+	_SortQuick2(a, left, pivot_idx - 1, cmp);
+	_SortQuick2(a, pivot_idx + 1, right, cmp);
+}
+
+// quick sort with insert sort caller
+void SortQuick2(FLT64 a[], INT32 n)
+{
+	_SortQuick2(a, 0, n - 1, compare);
 }
