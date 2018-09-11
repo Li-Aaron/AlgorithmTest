@@ -19,7 +19,6 @@ import copy
 ############################################## 
 NumNumbers = 100
 RandomNumbers = [random.uniform(0,10) for x in range(0,NumNumbers,1)]
-SortFunc = [BubbleSort,SelectSort,InsertSort,QuickSort,QuickSort2,ShellSort,MergeSort,HeapSort]
 
 ##############################################
 #----------------  FUNCTION  ----------------#

@@ -48,6 +48,7 @@ LFLAGS = $(LIBPATHS) /MANIFEST /LTCG:incremental /NXCOMPAT /DYNAMICBASE  /DEBUG 
 
 OBJ = $(SRC_DIR)\sort_cmp.obj \
 			$(SRC_DIR)\sort_bubble.obj \
+			$(SRC_DIR)\sort_select.obj \
 			$(SRC_DIR)\sort_insert.obj \
 			$(SRC_DIR)\sort_quick.obj
 

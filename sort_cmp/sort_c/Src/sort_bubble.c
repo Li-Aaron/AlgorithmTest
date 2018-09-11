@@ -11,9 +11,7 @@ void SortBubble(FLT64 a[], INT32 n)
 		{
 			if (!compare(a[j], a[j + 1]))
 			{
-				tmp = a[j];
-				a[j] = a[j + 1];
-				a[j + 1] = tmp;
+				swap(a, j, j+1);
 			}
 		}
 	}

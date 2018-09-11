@@ -22,6 +22,7 @@ sort_lib = CDLL('./sort_c/Lib/sort.dll')
 
 SortFuncC = [
   sort_lib.SortBubble,
+  sort_lib.SortSelect,
   sort_lib.SortInsert,
   sort_lib.SortQuick,
   sort_lib.SortQuick2,
@@ -62,8 +63,9 @@ def SortCaller(func, py_list):
 
 if __name__ == '__main__':
   import random
-  NumNumbers = 30
+  NumNumbers = 8
   RandomNumbers = [random.uniform(0,10) for x in range(0,NumNumbers,1)]
   print(RandomNumbers)
   for func in SortFuncC:
+    print("%12s"%func.__name__, end=' ')
     print(SortCaller(func, RandomNumbers))

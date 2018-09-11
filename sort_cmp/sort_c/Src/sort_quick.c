@@ -16,14 +16,10 @@ INT32 _SortPartion(FLT64 a[], INT32 left, INT32 right, BOOLEAN cmp(FLT64, FLT64)
 			left++;
 		}
 		// swap these two
-		tmp = a[right];
-		a[right] = a[left];
-		a[left] = tmp;
+		swap(a, left, right);
 	}
 	// swap pivot(left) to 'middle'
-	tmp = a[pivot_idx];
-	a[pivot_idx] = a[left];
-	a[left] = tmp;
+	swap(a, pivot_idx, left);
 	return left; // to be new pivot
 }
 
