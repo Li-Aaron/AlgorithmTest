@@ -53,7 +53,7 @@ void _SortQuick2(FLT64 a[], INT32 left, INT32 right, BOOLEAN cmp(FLT64, FLT64))
 {
 	// terminate condition
 	if (right - left < 10){
-		SortInsert(&a[left], right - left);
+		SortInsert(&a[left], right - left + 1);
 		return;
 	}
 
