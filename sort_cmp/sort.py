@@ -15,14 +15,16 @@ import random, time
 import copy
 
 ##############################################
-#---------------  CONSTANT  -----------------#
-############################################## 
-NumNumbers = 100
-RandomNumbers = [random.uniform(0,10) for x in range(0,NumNumbers,1)]
-
-##############################################
 #----------------  FUNCTION  ----------------#
 ##############################################
+def GenRandNum(Length = 100):
+    '''
+    Generate Random List
+    :param Length:  List Length
+    :return:        Random List
+    '''
+    return [random.uniform(0,10) for x in range(0,Length,1)]
+
 @duration
 def SortStd(NumberList):
     '''
@@ -87,14 +89,15 @@ def SortTestC(fSort, NumberList, StdList = None, PrintFlag = True):
 #------------------  MAIN  ------------------#
 ##############################################
 if __name__ == '__main__':
-    RandList = copy.copy(RandomNumbers)
-    StdList = SortStd(RandList)
-    
+    # in order to avoid changes in original list, we use copy of list to test
     print("Python Sort Test")
-    RandList = copy.copy(RandomNumbers)
+    RandList = GenRandNum(1000)
+    StdList = SortStd(copy.copy(RandList))
     for cSort in SortFunc:
-        SortTest(cSort, RandList, StdList)
+        SortTest(cSort, copy.copy(RandList), StdList)
 
     print("C Sort Test")
+    RandList = GenRandNum(100000)
+    StdList = SortStd(copy.copy(RandList))
     for fSort in SortFuncC:
-        SortTestC(fSort, RandList, StdList)
+        SortTestC(fSort, copy.copy(RandList), StdList)
