@@ -12,23 +12,36 @@ __author__ = 'AC'
 from sort_py import *
 from sort_c import *
 import random, time
+import copy
 
 ##############################################
 #---------------  CONSTANT  -----------------#
 ############################################## 
-NumNumbers = 1000
+NumNumbers = 100
 RandomNumbers = [random.uniform(0,10) for x in range(0,NumNumbers,1)]
-SortFunc = [BubbleSort,SelectSort,InsertSort,QuickSort,ShellSort,MergeSort,HeapSort]
+SortFunc = [BubbleSort,SelectSort,InsertSort,QuickSort,QuickSort2,ShellSort,MergeSort,HeapSort]
 
 ##############################################
 #----------------  FUNCTION  ----------------#
 ##############################################
 @duration
 def SortStd(NumberList):
+    '''
+    Get the Standard Result of Sort (Python Based)
+    :param NumberList:  Random Number List
+    :return:            Standard Number List
+    '''
     return sort().Sort(NumberList)
 
 def SortTest(cSort, NumberList, StdList = None, PrintFlag = True):
-    # For Python Sort Code Testing
+    '''
+    For Python Sort Code Testing
+    :param cSort:       Python based Sort Class
+    :param NumberList:  Random Number List
+    :param StdList:     Standard Number List
+    :param PrintFlag:   Print Flag
+    :return:            A dictionary of Result
+    '''
     RandList = copy.copy(NumberList)
     startTime = time.time()
     result = cSort().SortTest(RandList)
@@ -46,9 +59,15 @@ def SortTest(cSort, NumberList, StdList = None, PrintFlag = True):
         # PrintNumList(RandList)
     return result
 
-
 def SortTestC(fSort, NumberList, StdList = None, PrintFlag = True):
-    # For C Sort Code Testing
+    '''
+    For C Sort Code Testing
+    :param fSort:       C based Sort Function
+    :param NumberList:  Random Number List
+    :param StdList:     Standard Number List
+    :param PrintFlag:   Print Flag
+    :return:            A dictionary of Result
+    '''
     result = dict()
     RandList = copy.copy(NumberList)
     startTime = time.time()
@@ -80,5 +99,3 @@ if __name__ == '__main__':
     print("C Sort Test")
     for fSort in SortFuncC:
         SortTestC(fSort, RandList, StdList)
-        
-    

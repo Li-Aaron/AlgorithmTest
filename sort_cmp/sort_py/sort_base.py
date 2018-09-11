@@ -9,8 +9,7 @@ __author__ = 'AC'
 ##############################################
 #----------------  IMPORT  ------------------#
 ############################################## 
-import random
-import copy, time
+import time
 import functools
 from functools import cmp_to_key
 
@@ -18,7 +17,11 @@ from functools import cmp_to_key
 #---------------  DECORATORS  ---------------#
 ##############################################
 def duration(func):
-  # a decorator for time duration test
+  '''
+  a decorator for time duration test
+  :param func:  target function
+  :return:      target function return
+  '''
   @functools.wraps(func)
   def wrapper(*args, **kw):
     startTime = time.time()
@@ -29,6 +32,11 @@ def duration(func):
   return wrapper
 
 def res_chk(std_res):
+  '''
+  a decorator for result check test
+  :param std_res:  standard result
+  :return:         target function return
+  '''
   def decorator(func):
     # a decorator for time duration test
     @functools.wraps(func)
@@ -46,7 +54,12 @@ def res_chk(std_res):
 #----------------  FUNCTION  ----------------#
 ##############################################
 def PrintNumList(NumberList, len = 5):
-    # Print a long numberlist with selected header/foot length
+    '''
+    Print a long numberlist with selected Header/Footer length
+    :param NumberList:  Number List
+    :param len:         Header/Footer length
+    :return:
+    '''
     for num in NumberList[0:len]:
         print("%4.3f, " % num, end=' ')
     print("..., ", end=' ')
@@ -58,68 +71,66 @@ def PrintNumList(NumberList, len = 5):
 ##############################################
 #-----------------  CLASS  ------------------#
 ##############################################
-
-###################################
-# class sort
-# sort类
-################################### 
 class sort:
-    """通用sort基类"""
-    ###################################
-    # Variables
-    ################################### 
+    """General Sort Basis"""
+
     __swapCount = 0
     __searchCount = 0
 
-    ###################################
-    # Swap
-    # 在List中交换两数
-    ################################### 
     def Swap(self, NumberList, i, j):
+        '''
+        Swap two numbers in list
+        :param NumberList:  Number List (IN/OUT)
+        :param i:           index i
+        :param j:           index j
+        :return:            Number List
+        '''
         tmp = NumberList[i]
         NumberList[i] = NumberList[j]
         NumberList[j] = tmp
         self.__swapCount += 1
         return NumberList
 
-    ###################################
-    # ClearCount
-    # 清除统计量
-    ################################### 
     def ClearCount(self):
+        '''
+        Clear the Static Counts
+        :return: void
+        '''
         self.__swapCount = 0
         self.__searchCount = 0
 
-    ###################################
-    # GetCount
-    # 获取统计值（打印）
-    ################################### 
     def GetCount(self):
+        '''
+        Get the Static Counts for Print
+        :return: Static Count dict
+        '''
         # print "SwapCount = %10d ,\tSearchCount = %10d" % (self.__swapCount, self.__searchCount),
         return {"Swap":self.__swapCount, "Search":self.__searchCount}
 
-    ###################################
-    # AddSearchCount
-    # 检索统计值加一
-    ################################### 
     def AddSearchCount(self):
+        '''
+        Search Count Plus One
+        '''
         self.__searchCount += 1
 
-    ###################################
-    # SortTest
-    # 排序函数
-    ################################### 
     def SortTest(self, NumberList):
+        '''
+        Test Function of Sort Method
+        :param NumberList:  Random Number List
+        :return:            Static Count dict
+        '''
         self.ClearCount()
         self.Sort(NumberList)
         return self.GetCount()
 
-    ###################################
-    # SortCmp
-    # 排序比较方法
-    ################################### 
     @staticmethod
     def SortCmp(a, b):
+        '''
+        Compare Method, using for setting the rule of compare
+        :param a:   value a
+        :param b:   value b
+        :return:    -1/0/1
+        '''
         if a < b:
             return -1
         if a == b:
@@ -127,10 +138,11 @@ class sort:
         else:
             return 1
 
-    ###################################
-    # Sort
-    # 排序函数(内部实现)(Python自带排序)
-    ###################################         
     def Sort(self, NumberList):
+        '''
+        Sort Function, Main Function
+        :param NumberList:  Random Number List (IN/OUT)
+        :return:            Sorted Number List (OUT)
+        '''
         NumberList = sorted(NumberList, key=cmp_to_key(self.SortCmp))
         return NumberList

@@ -1,9 +1,5 @@
 from sort_py.sort_base import sort
 
-###################################
-# class HeapSort (基类sort)
-# 堆排序(Heapsort)是指利用堆积树（堆）这种数据结构所设计的一种排序算法，它是选择排序的一种。
-###################################
 class HeapSort(sort):
     """ -- 以下内容出自百度文库
     排序(Heapsort)是指利用堆积树（堆）这种数据结构所设计的一种排序算法，它是选择排序的一种。
@@ -13,24 +9,39 @@ class HeapSort(sort):
     CHILD = {2*PARENT+1, 2*PARENT+2}
     """
 
-    ###################################
-    # Sort
-    # 排序函数(内部实现)
-    ###################################
     def Sort(self, NumberList):
+        '''
+        Sort Function, Main Function
+        :param NumberList:  Random Number List (IN/OUT)
+        :return:            Sorted Number List (OUT)
+        '''
         NumLen = len(NumberList)
         for Stop in range(NumLen-1, 0, -1):
-            self.__BuildHeap(NumberList, 0, Stop)
+            # Building Big Root Heap
+            self._BuildHeap(NumberList, 0, Stop)
+            # Make First Node Down
             self.Swap(NumberList, 0, Stop)
         return NumberList
 
-    def __BuildHeap(self, NumberList, Start, Stop):
-        '''建立大根堆，让最大的浮上来'''
+    def _BuildHeap(self, NumberList, Start, Stop):
+        '''
+        Building a Big root heap, let the biggest pop up
+        :param NumberList:  Number List (IN/OUT)
+        :param Start:       Start Node Index
+        :param Stop:        Stop Node Index
+        :return:            Number List (OUT)
+        '''
         for Parent in range(Stop//2, Start-1, -1):
-            self.__ShiftDown(NumberList, Parent, Stop)
+            self._ShiftDown(NumberList, Parent, Stop)
 
-    def __ShiftDown(self, NumberList, Parent, Boundary):
-        '''节点比较'''
+    def _ShiftDown(self, NumberList, Parent, Boundary):
+        '''
+        Compare Node and Shift down parent node if child is larger
+        :param NumberList:  Number List (IN/OUT)
+        :param Parent:      Parent Node Index
+        :param Boundary:    List Boundary
+        :return:            Number List (OUT)
+        '''
         cmp = self.SortCmp
         Child1 = Parent * 2 + 1
         Child2 = Parent * 2 + 2

@@ -5,4 +5,4 @@ from sort_py.sort_select import SelectSort
 from sort_py.sort_heap import HeapSort
 from sort_py.sort_merge import MergeSort
 from sort_py.sort_shell import ShellSort
-from sort_py.sort_quick import QuickSort
+from sort_py.sort_quick import QuickSort, QuickSort2
