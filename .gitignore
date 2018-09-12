@@ -1,5 +1,6 @@
 *.pyc
 
+
 # PyCharm Prj Files
 misc.xml
 modules.xml
@@ -7,3 +8,16 @@ modules.xml
 vcs.xml
 workspace.xml
 *.ipynb
+
+# C build file
+*.dll
+*.manifest
+*.exp
+*.iobj
+*.ipdb
+*.pdb
+*.lib
+*.obj
+
+# vs code file
+setting.json
