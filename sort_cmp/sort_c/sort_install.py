@@ -24,6 +24,7 @@ SortFuncC = [
   sort_lib.SortBubble,
   sort_lib.SortSelect,
   sort_lib.SortInsert,
+  sort_lib.SortShell,
   sort_lib.SortQuick,
   sort_lib.SortQuick2,
 ]

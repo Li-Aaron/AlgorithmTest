@@ -20,4 +20,4 @@ workspace.xml
 *.obj
 
 # vs code file
-setting.json
+settings.json

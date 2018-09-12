@@ -14,6 +14,7 @@ extern inline void swap(FLT64 a[], INT32 x, INT32 y);
 EXPORT void SortBubble(FLT64 a[], INT32 n);
 EXPORT void SortInsert(FLT64 a[], INT32 n);
 EXPORT void SortSelect(FLT64 a[], INT32 n);
+EXPORT void SortShell(FLT64 a[], INT32 n);
 EXPORT void SortQuick(FLT64 a[], INT32 n);
 EXPORT void SortQuick2(FLT64 a[], INT32 n);
 
