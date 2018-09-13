@@ -1,6 +1,7 @@
 # Check Environment
 !IFNDEF WORKSPACE
-!ERROR WORKSPACE environmental variable not set
+#!ERROR WORKSPACE environmental variable not set
+WORKSPACE	= .
 !ENDIF
 
 !IFNDEF VCINSTALLDIR
