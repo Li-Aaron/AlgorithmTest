@@ -101,3 +101,13 @@ if __name__ == '__main__':
     StdList = SortStd(copy.copy(RandList))
     for fSort in SortFuncC:
         SortTestC(fSort, copy.copy(RandList), StdList)
+
+    print("C Sort Test EX")
+    RandList = GenRandNum(10000000)
+    SortFuncC_Ex = [
+        sort_lib.SortShell,
+        sort_lib.SortQuick,
+        sort_lib.SortQuick2,
+    ]
+    for fSort in SortFuncC_Ex:
+        SortTestC(fSort, copy.copy(RandList))
