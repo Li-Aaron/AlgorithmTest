@@ -28,7 +28,7 @@ class MergeSort(sort):
         if (right - left <= 1):
             # Terminate Condition
             # if right - left <= 0, when right - left = 1, the
-            # middle will always be 1
+            # middle will always be left
             return NumberList
         middle = (left + right) // 2
         self._Sort(NumberList, left, middle)

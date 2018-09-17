@@ -52,6 +52,7 @@ OBJ = $(SRC_DIR)\sort_cmp.obj \
 			$(SRC_DIR)\sort_select.obj \
 			$(SRC_DIR)\sort_insert.obj \
 			$(SRC_DIR)\sort_shell.obj \
+			$(SRC_DIR)\sort_merge.obj \
 			$(SRC_DIR)\sort_quick.obj
 
 TARGET_NAME = $(OUT_DIR)\sort.dll
