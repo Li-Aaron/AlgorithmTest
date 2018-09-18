@@ -28,6 +28,7 @@ SortFuncC = [
   sort_lib.SortQuick,
   sort_lib.SortQuick2,
   sort_lib.SortMerge,
+  sort_lib.SortHeap,
 ]
 
 
