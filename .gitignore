@@ -1,5 +1,5 @@
 *.pyc
-
+*.log
 
 # PyCharm Prj Files
 misc.xml
@@ -15,9 +15,28 @@ workspace.xml
 *.exp
 *.iobj
 *.ipdb
+*.idb
 *.pdb
 *.lib
 *.obj
+*.exe
 
 # vs code file
 settings.json
+launch.json
+*.tlog
+*.lastbuildstate
+
+# visual studio files
+*.filters
+*.vcxproj
+*.sln
+*.suo
+*.enc
+*.db
+*.ilk
+
+# ctags file
+tags
+
+
