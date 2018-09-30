@@ -16,11 +16,15 @@ class HeapSort(sort):
     :return:      Sorted Number List (OUT)
     '''
     NumLen = len(NumberList)
+    # Building Big Root Heap First
+    self._BuildHeap(NumberList, 0, NumLen-1)
+
+    # From the second time, only the first node is smaller.
     for Stop in range(NumLen-1, 0, -1):
-      # Building Big Root Heap
-      self._BuildHeap(NumberList, 0, Stop)
       # Make First Node Down
       self.Swap(NumberList, 0, Stop)
+      # Shift New First Node Down (without consider of last number)
+      self._ShiftDown(NumberList, 0, Stop - 1)
     return NumberList
 
   def _BuildHeap(self, NumberList, Start, Stop):
@@ -43,18 +47,20 @@ class HeapSort(sort):
     :return:      Number List (OUT)
     '''
     cmp = self.SortCmp
-    Child1 = Parent * 2 + 1
-    Child2 = Parent * 2 + 2
-    if (Child2 <= Boundary):
-      self.AddSearchCount()
-      ChildLarge = Child2 if cmp(NumberList[Child1],NumberList[Child2])<0 else Child1
-      self.AddSearchCount()
-      if cmp(NumberList[Parent],NumberList[ChildLarge])<0:
-        self.Swap(NumberList, Parent, ChildLarge)
+    Child = Parent * 2 + 1
 
-    elif (Child1 <= Boundary):
+    if (Child <= Boundary):
+      if (Child + 1 <= Boundary):
+        # compare two child first
+        self.AddSearchCount()
+        if cmp(NumberList[Child], NumberList[Child+1])<0:
+          Child = Child + 1
+
+      # compare with parent
       self.AddSearchCount()
-      if cmp(NumberList[Parent],NumberList[Child1])<0:
-        self.Swap(NumberList, Parent, Child1)
-        
+      if cmp(NumberList[Parent],NumberList[Child])<0:
+        # swap then compare with grandchilds
+        self.Swap(NumberList, Parent, Child)
+        self._ShiftDown(NumberList, Child, Boundary)
+
     return NumberList

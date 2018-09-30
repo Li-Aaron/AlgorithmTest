@@ -111,6 +111,7 @@ if __name__ == '__main__':
     sort_lib.SortQuick,
     sort_lib.SortQuick2,
     sort_lib.SortMerge,
+    sort_lib.SortHeap,
   ]
   for fSort in SortFuncC_Ex:
     SortTestC(fSort, copy.copy(RandList))

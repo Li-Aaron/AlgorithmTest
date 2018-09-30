@@ -3,23 +3,20 @@
 void _ShiftDown(FLT64 a[], INT32 parent, INT32 boundary, BOOLEAN cmp(FLT64, FLT64))
 {
   // index start with 0
-  INT32 child1 = parent * 2 + 1;
-  INT32 child2 = parent * 2 + 2;
-  INT32 child_large;
-  // both 2 values in boundary
-  if (child2 <= boundary){
-    if (cmp(a[parent], a[child1]) || cmp(a[parent], a[child2]))
-    {
-      // find larger child
-      child_large = cmp(a[child1], a[child2])? child2 : child1;
-      if (cmp(a[parent], a[child_large])){
-        swap(a, parent, child_large);
+  INT32 child = parent * 2 + 1;
+  
+  if (child <= boundary){
+    if (child + 1 <= boundary){
+      // both 2 values in boundary, compare two child first
+      if (cmp(a[child], a[child+1])){
+        child += 1;
       }
     }
-  } else if (child1 <= boundary) {
-    // only 1 value in boundary
-    if (cmp(a[parent], a[child1])){
-        swap(a, parent, child1);
+    // compare parent and (larger) child
+    if (cmp(a[parent], a[child])){
+      // swap then compare with grandchilds
+      swap(a, parent, child);
+      _ShiftDown(a, child, boundary, cmp);
     }
   }
 }
@@ -36,11 +33,15 @@ void _BuildHeap(FLT64 a[], INT32 start, INT32 stop, BOOLEAN cmp(FLT64, FLT64))
 // heap sort
 void SortHeap(FLT64 a[], INT32 n)
 {
-  INT32 stop;
-  for (stop = n-1; stop > 0; stop--){
-    // Building Big Root Heap
-    _BuildHeap(a, 0, stop, compare);
+  INT32 stop = n-1;
+  // Building Big Root Heap
+  _BuildHeap(a, 0, stop, compare);
+
+  while (stop > 0){
     // Make First Node Down
     swap(a, 0, stop);
+    // Shift New First Node Down (without consider of last number)
+    _ShiftDown(a, 0, stop-1, compare);
+    stop--;
   }
 }
