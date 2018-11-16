@@ -68,5 +68,5 @@ def run_points(A_list_all, target_num = 24):
 if __name__ == '__main__':
     A = [random.randint(0,TARGET_NUM/2) for x in range(NUM)]
     A_list_all = [[{'value': float(x), 'str': str(x)}] for x in A]
-    print A
-    print run_points(A_list_all, TARGET_NUM)
+    print(A)
+    print(run_points(A_list_all, TARGET_NUM))

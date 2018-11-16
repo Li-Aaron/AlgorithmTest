@@ -28,7 +28,7 @@ class PieSorting(object):
             self.PieArray = PieArray
         elif PieCnt:
             self.PieCnt = PieCnt
-            self.PieArray = range(0,PieCnt)
+            self.PieArray = list(range(0,PieCnt))
             random.shuffle(self.PieArray)
         else:
             raise ValueError('PieCnt and PieArray must exist once.')

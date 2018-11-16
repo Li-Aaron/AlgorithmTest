@@ -114,29 +114,29 @@ class Knapsack(object):
     def knap_test(self):
         self.count_init()
         # 递推
-        print 'recurrence:'
+        print('recurrence:')
         val = self.cal_knapsack()
         x = self.cal_x_result()
-        print 'val=%s, x=%s' % (val, x)
-        print 'lut=\n%s' % self.f
+        print('val=%s, x=%s' % (val, x))
+        print('lut=\n%s' % self.f)
 
         # 递归
-        print 'recursion:'
+        print('recursion:')
         val = self.cal_knapsack_recursion()
         x = self.cal_x_result()
-        print 'val=%s, x=%s' % (val, x)
-        print 'lut=\n%s'%self.f
+        print('val=%s, x=%s' % (val, x))
+        print('lut=\n%s'%self.f)
 
-        print 'recurrence entered:    %s'%self.n_recurrence_enter
-        print 'recurrence calculated: %s'%self.n_recurrence
-        print 'recursion entered:     %s'%self.n_recursion_enter
-        print 'recursion calculated:  %s'%self.n_recursion
+        print('recurrence entered:    %s'%self.n_recurrence_enter)
+        print('recurrence calculated: %s'%self.n_recurrence)
+        print('recursion entered:     %s'%self.n_recursion_enter)
+        print('recursion calculated:  %s'%self.n_recursion)
 
 
 if __name__ == '__main__':
     N = 6
     V = 10
-    print 'N = %s, V = %s'%(N,V)
+    print('N = %s, V = %s'%(N,V))
     kp = Knapsack(N, V)
     kp.knap_test()
 

@@ -129,7 +129,7 @@ class Sudoku(object):
                 display += str(val) if val else ' '
                 display += '|' if x in [2,5] else ' '
             display += '\n-----+-----+-----\n' if y in [2,5] else '\n'
-        print display
+        print(display)
 
 if __name__ == '__main__':
     s = Sudoku()

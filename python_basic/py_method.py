@@ -24,7 +24,7 @@ class Date(object):
     @staticmethod
     def date_now():
         t=time.localtime()
-        print 'year:%s, month:%s, day:%s'%(t.tm_year, t.tm_mon, t.tm_mday)
+        print('year:%s, month:%s, day:%s'%(t.tm_year, t.tm_mon, t.tm_mday))
 
     @property
     def date(self):
@@ -39,23 +39,23 @@ if __name__ == '__main__':
     t = time.localtime()
     a = EuroDate(t.tm_year, t.tm_mon, t.tm_mday)
 
-    print 1
-    print a, type(a)
-    print a.year,a.month,a.day
+    print(1)
+    print(a, type(a))
+    print(a.year,a.month,a.day)
     a.date_now()
-    print a.date
+    print(a.date)
 
     a.date_now()
     b = EuroDate.now()
-    print 2
-    print b, type(b)
-    print b.year,b.month,b.day
+    print(2)
+    print(b, type(b))
+    print(b.year,b.month,b.day)
     b.date_now()
-    print b.date
+    print(b.date)
 
     c = EuroDate.cnow()
-    print 3
-    print c, type(c)
-    print c.year,c.month,c.day
+    print(3)
+    print(c, type(c))
+    print(c.year,c.month,c.day)
     c.date_now()
-    print c.date
+    print(c.date)
