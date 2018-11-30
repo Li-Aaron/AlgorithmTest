@@ -47,5 +47,8 @@
     <ClCompile Include="..\Src\sort_shell.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Src\sort_heap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

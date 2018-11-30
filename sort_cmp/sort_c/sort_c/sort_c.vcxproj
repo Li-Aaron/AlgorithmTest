@@ -122,6 +122,7 @@
     <ClCompile Include="..\Src\sort_bubble.c" />
     <ClCompile Include="..\Src\sort_cmp.c" />
     <ClCompile Include="..\Src\sort_dbg.c" />
+    <ClCompile Include="..\Src\sort_heap.c" />
     <ClCompile Include="..\Src\sort_insert.c" />
     <ClCompile Include="..\Src\sort_merge.c" />
     <ClCompile Include="..\Src\sort_quick.c" />
