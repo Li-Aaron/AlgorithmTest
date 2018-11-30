@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 '''
 有一个正整数，请找出其二进制表示中1的个数相同、且大小最接近的那两个数。(一个略大，一个略小)
 
@@ -6,7 +7,6 @@
 
 class CloseNumber:
   def getCloseNumber(self, x):
-    # write code here
     return [self.getSmallerNumber(x), self.getLargerNumber(x)]
 
   def getSmallerNumber(self, x):
