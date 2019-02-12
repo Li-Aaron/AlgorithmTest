@@ -8,6 +8,7 @@
 [point_game]24点游戏  
 [sort_old_even_cbased]排序，奇数在前偶数在后（C/Python混编）  
 [md5_cmp]比较文件夹中的文件，并merge到同一个文件夹  
+[train_ticket]获取火车票信息  
 [cracking_the_coding_interview]程序员面试金典编程题（部分）  
 
 [python_basic]python的一些语法  
