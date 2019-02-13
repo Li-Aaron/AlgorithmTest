@@ -31,6 +31,22 @@ PROXIES = {
 STA_DIC = {}
 STA_REV = {}
 
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        pass
+
+    try:
+        import unicodedata
+        unicodedata.numeric(s)
+        return True
+    except (TypeError, ValueError):
+        pass
+
+    return False
+
 class Train(object):
 
   headers = '车次 始终 区间 时间 历时 过夜 商务 一等 二等 高软 软卧 动卧 硬卧 硬座 无座'.split()
@@ -143,34 +159,67 @@ class Cli():
       STA_REV[code] = chn
 
   def parseArgs(self):
-    args = docopt(__doc__)
+    # args = docopt(__doc__)
+    # test
+    args = {'-d': True,
+            '-g': True,
+            '-k': False,
+            '-t': True,
+            '-z': True,
+            '<date>': '2019 3 1',
+            '<from>': '上海',
+            '<to>': '长春'
+            }
     # parse arguments
     try:
       self.from_station = STA_DIC.get(args['<from>'])
       self.to_station = STA_DIC.get(args['<to>'])
-      date = args['<date>']
     except:
       raise ValueError('invalid station name')
+    t_str = args['<date>']
+    self.date = self.convTime(t_str)
+    return args
 
-    if date == 'now' or date == 'today':
-      self.date = time.strftime('%Y-%m-%d')
-    elif time.strptime(date, '%Y-%m-%d') < time.strptime(time.strftime('%Y-%m-%d'), '%Y-%m-%d'):
+  def convTime(self, t_str):
+    t = time.time()
+    day = 24*60*60
+    # condition: now/tomorrow
+    if t_str == 'now' or t_str == 'today':
+      date = time.strftime('%Y-%m-%d', time.localtime(t))
+    elif t_str == 'tom' or t_str == 'tomorrow':
+      date = time.strftime('%Y-%m-%d', time.localtime(t+1*day))
+    # condition: number
+    elif is_number(t_str):
+      date = time.strftime('%Y-%m-%d', time.localtime(t+int(t_str)*day))
+    # condition: strftime
+    else:
+      obj = re.search(r'(\d{4})[/\- ](\d{1,2})[/\- ](\d{1,2})$', t_str)
+      if obj:
+        date = '%04d-%02d-%02d'%tuple(int(num) for num in obj.group(1,2,3))
+      else:
+        raise ValueError('The date string is not supported')
+
+    # time < current time condition
+    if time.strptime(date, '%Y-%m-%d') < time.strptime(time.strftime('%Y-%m-%d'), '%Y-%m-%d'):
       raise ValueError('The date is before current date')
     else:
-      self.date = date
-    return args
+      return date
 
   def getTrainInfo(self):
     # get train info
     self.request_url += '?leftTicketDTO.train_date={}&leftTicketDTO.from_station={}&leftTicketDTO.to_station={}&purpose_codes=ADULT'.format(self.date, self.from_station, self.to_station)
     r = requests.get(self.request_url, proxies = PROXIES)
-    raw_data = r.json()['data']['result']
+    try:
+      raw_data = r.json()['data']['result']
+    except:
+      raise ConnectionError('This is not a valid date on server')
     return raw_data
 
   def run(self):
     """command-line interface"""
 
     raw_data = self.getTrainInfo()
+    print('查询日期：%s'%self.date)
     Train(raw_data, self.options).prettyPrint()
 
 if __name__ == '__main__':
