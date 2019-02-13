@@ -14,6 +14,8 @@ Options:
 
 Example:
   tickets 南京 北京 2016-07-01
+  tickets 南京 北京 now(today/tom/tomorrow)
+  tickets 南京 北京 0 (stand for day from now)
   tickets -dg 南京 北京 2016-07-01
 """
 from docopt import docopt
@@ -159,17 +161,17 @@ class Cli():
       STA_REV[code] = chn
 
   def parseArgs(self):
-    # args = docopt(__doc__)
+    args = docopt(__doc__)
     # test
-    args = {'-d': True,
-            '-g': True,
-            '-k': False,
-            '-t': True,
-            '-z': True,
-            '<date>': '2019 3 1',
-            '<from>': '上海',
-            '<to>': '长春'
-            }
+    # args = {'-d': True,
+    #         '-g': True,
+    #         '-k': False,
+    #         '-t': True,
+    #         '-z': True,
+    #         '<date>': '2019 3 1',
+    #         '<from>': '上海',
+    #         '<to>': '长春'
+    #         }
     # parse arguments
     try:
       self.from_station = STA_DIC.get(args['<from>'])
